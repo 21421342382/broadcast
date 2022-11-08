@@ -10,6 +10,10 @@ class main_page_controller{
   static bool loaded_live_news = false;
   static var _live_news ;
   static var _news ;
+  static var url ;
+  static var title ;
+  static var photo ;
+
 
   //////////////// NETWORKING /////////////////////
 
