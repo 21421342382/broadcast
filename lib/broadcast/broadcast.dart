@@ -138,7 +138,7 @@ class _broadcast_youtubeState extends State<broadcast_youtube> {
                 Expanded(
                   child:
                   ListView.builder(
-                      itemCount: snapshot.data.length -1,
+                      itemCount: snapshot.data.length,
                       itemBuilder: (context, int index){
                     return Padding(
                       padding: const EdgeInsets.all(8.0),

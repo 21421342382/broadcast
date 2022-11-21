@@ -1,9 +1,14 @@
 import 'package:broadcast/splash.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 
-void main() {
-  runApp(const main_page());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations(
+    [DeviceOrientation.portraitUp],
+  ); // To turn off landscape mode
+  runApp(main_page());
 }
 class main_page extends StatefulWidget {
   const main_page({Key? key}) : super(key: key);
