@@ -51,7 +51,8 @@ dependencies:
   like_button: ^2.0.5
   youtube_player_flutter: ^8.1.1
   just_audio: ^0.9.30
-
+  youtube_explode_dart: ^1.12.3
+  audio_video_progress_bar: ^0.11.0
 
 
 dev_dependencies:
