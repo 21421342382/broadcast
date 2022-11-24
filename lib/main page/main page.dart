@@ -1,12 +1,12 @@
 import 'package:broadcast/account%20page/account%20page.dart';
 import 'package:broadcast/add%20new/add%20new.dart';
-import 'package:broadcast/books/books.dart';
 import 'package:broadcast/broadcast/broadcast.dart';
 import 'package:broadcast/controllers/main%20page%20controller.dart';
 import 'package:awesome_bottom_navigation/awesome_bottom_navigation.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:broadcast/main%20page/news%20section.dart';
 import 'package:flutter/material.dart';
+import '../audio/audio.dart';
 import '../elements/main page news card.dart';
 import '../elements/main page top.dart';
 import '../elements/something went wrong.dart';
@@ -26,7 +26,7 @@ class _Main_PageState extends State<Main_Page> {
     news_section(),
     broadcast(),
     add_new(),
-    books(),
+    audio(),
     account_page()
   ];
 
@@ -46,7 +46,7 @@ class _Main_PageState extends State<Main_Page> {
               MdiIcons.newspaperVariantMultiple ,
               MdiIcons.broadcast,
               MdiIcons.plusCircle,
-              MdiIcons.book,
+              Icons.audiotrack_outlined,
               MdiIcons.accountCircleOutline
               // Icons.settings_outlined,
             ],
@@ -54,7 +54,7 @@ class _Main_PageState extends State<Main_Page> {
               MdiIcons.newspaper,
               MdiIcons.broadcast,
               MdiIcons.plusCircle,
-              MdiIcons.book,
+              Icons.audiotrack,
               Icons.account_circle,
               // Icons.settings,
             ],
