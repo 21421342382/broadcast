@@ -8,7 +8,9 @@ class main_page_controller{
   static bool data_loaded = false;
   static bool connected = false;
   static bool loaded_live_news = false;
+  static bool loaded_audio = false;
   static var _live_news ;
+  static var _audio ;
   static var _news ;
   static var url ;
   static var title ;
@@ -52,6 +54,23 @@ static load_live_news()async {
     }
   }
 
+  static load_music()async {
+    if(loaded_audio == false){
+      final conn_url = await Db.create("mongodb+srv://broadcast_server_access:123qpa456lzm@broadcast.eevngdm.mongodb.net/broadcast_api?retryWrites=true&w=majority");
+      await conn_url.open();
+      connected = true;
+      var coll = conn_url.collection('audio');
+      var news = await coll.find().toList();
+      conn_url.close();
+      print(news.length);
+      main_page_controller.loaded_audio = true;
+      _audio = news;
+      print(_audio.length);
+      return _audio;
+    }else{
+      return _audio;
+    }
+  }
 
 ////////////////////////// Functions /////////////////////////////////
 

@@ -9,11 +9,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
-class music_card extends StatefulWidget {
-  const music_card({Key? key}) : super(key: key);
+late _music_cardState music_card_state ;
 
+class music_card extends StatefulWidget {
+  music_card({Key? key, required this.title, required this.author, required this.thumbnail, required this.url}) : super(key: key);
+ var title ;
+ var author ;
+ var thumbnail ;
+ var url ;
   @override
-  State<music_card> createState() => _music_cardState();
+  State<music_card> createState() {
+    music_card_state = _music_cardState();
+    return music_card_state ;
+  }
 }
 
 class _music_cardState extends State<music_card> {
@@ -29,21 +37,20 @@ class _music_cardState extends State<music_card> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        SizedBox(height: 10,),
         Row(
           children: [
             SizedBox(width: 10,),
           Container(
-          height: 170,
+          height: 130,
           width: 130,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(20))
           ),
-          child: Center(
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-              child: Image.network("https://a10.gaanacdn.com/images/albums/48/2455848/crop_480x480_2455848.jpg",fit: BoxFit.fill,),
+          child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            child: Image.network("${widget.thumbnail}",fit: BoxFit.fitHeight,),
 
-            ),
           ),
         ),
             SizedBox(width: 10,),
@@ -51,8 +58,10 @@ class _music_cardState extends State<music_card> {
               alignment: Alignment.topCenter,
               child: Column(
                 children: [
-                  Text("Sugar & Brownies",style: GoogleFonts.poppins(color: Colors.black87),),
-                  Text("Dharia",style: GoogleFonts.poppins(color: Colors.grey),),
+                  Container(
+                      width: 140,
+                      child: Text("${widget.title}",style: GoogleFonts.poppins(color: Colors.black87),overflow: TextOverflow.ellipsis,)),
+                  Text("${widget.author}",style: GoogleFonts.poppins(color: Colors.grey),),
                   SizedBox(height: 10,),
                   Row(
                     children: [
@@ -64,7 +73,7 @@ class _music_cardState extends State<music_card> {
                             });
                             if(play_pause == true) {
                               var yt = YoutubeExplode();
-                              var manifest = await yt.videos.streamsClient.getManifest("https://www.youtube.com/watch?v=y2tEPmwWEiI");
+                              var manifest = await yt.videos.streamsClient.getManifest("${widget.url}");
                               var streamInfo = manifest.audioOnly.withHighestBitrate();
                               var stream = yt.videos.streamsClient.get(streamInfo);
                               audio_player.setUrl(streamInfo.url.toString());
@@ -98,6 +107,7 @@ class _music_cardState extends State<music_card> {
             )
           ],
         ),
+        SizedBox(height: 10,),
         Padding(
           padding: const EdgeInsets.only(left: 18,right: 18),
           child: ProgressBar(
@@ -106,7 +116,7 @@ class _music_cardState extends State<music_card> {
             total: duration == null ?audio_player.duration ?? Duration.zero : duration,
             progressBarColor: Colors.red,
             baseBarColor: Colors.black87.withOpacity(0.24),
-            bufferedBarColor: Colors.black87.withOpacity(0.24),
+            bufferedBarColor: Colors.grey.withOpacity(0.24),
             thumbColor: Colors.black87,
             barHeight: 3.0,
             thumbRadius: 5.0,
