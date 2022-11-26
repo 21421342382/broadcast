@@ -115,6 +115,7 @@ class _music_cardState extends State<music_card> {
           buffered: buffer_progress == null ?audio_player.bufferedPosition : buffer_progress,
             total: duration == null ?audio_player.duration ?? Duration.zero : duration,
             progressBarColor: Colors.red,
+            timeLabelTextStyle: GoogleFonts.poppins(color: Colors.grey),
             baseBarColor: Colors.black87.withOpacity(0.24),
             bufferedBarColor: Colors.grey.withOpacity(0.24),
             thumbColor: Colors.black87,
