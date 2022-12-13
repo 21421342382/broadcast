@@ -30,7 +30,10 @@ class audio extends StatelessWidget {
                         title: snapshot.data[0]["title"],
                         author: snapshot.data[0]["author"],
                         thumbnail: snapshot.data[0]["thumbnail"],
-                        url: snapshot.data[0]["url"]),
+                        url: snapshot.data[0]["url"],
+                        snapshot_data: snapshot.data,
+                      current_index: 0,
+                    ),
                     SizedBox(height: 20,),
                     Row(
                       children: [
@@ -56,6 +59,8 @@ class audio extends StatelessWidget {
                             url: snapshot.data[index.toInt()]["url"],
                             content: snapshot.data[index.toInt()]["category"],
                             content_to_view: "Hip Hop",
+                            snapshot_data: snapshot.data,
+                            current_index: index.toInt(),
                           );
                         }),
                       ),
@@ -85,6 +90,8 @@ class audio extends StatelessWidget {
                                 url: snapshot.data[index.toInt()]["url"],
                                 content: snapshot.data[index.toInt()]["category"],
                                 content_to_view: "Old Memories",
+                                snapshot_data: snapshot.data,
+                                current_index: index.toInt(),
                               );
                             }),
                       ),
@@ -114,6 +121,8 @@ class audio extends StatelessWidget {
                                 url: snapshot.data[index.toInt()]["url"],
                                 content: snapshot.data[index.toInt()]["category"],
                                 content_to_view: "Bollywood",
+                                snapshot_data: snapshot.data,
+                                current_index: index.toInt(),
                               );
                             }),
                       ),
@@ -143,6 +152,8 @@ class audio extends StatelessWidget {
                                 url: snapshot.data[index.toInt()]["url"],
                                 content: snapshot.data[index.toInt()]["category"],
                                 content_to_view: "Hollywood",
+                                snapshot_data: snapshot.data,
+                                current_index: index.toInt(),
                               );
                             }),
                       ),
@@ -172,6 +183,8 @@ class audio extends StatelessWidget {
                                 url: snapshot.data[index.toInt()]["url"],
                                 content: snapshot.data[index.toInt()]["category"],
                                 content_to_view: "Tollywood",
+                                snapshot_data: snapshot.data,
+                                current_index: index.toInt(),
                               );
                             }),
                       ),

@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class other_music_card extends StatefulWidget {
-  other_music_card({Key? key, required this.title, required this.author, required this.thumbnail, required this.url, required this.content, required this.content_to_view}) : super(key: key);
+  other_music_card({Key? key, required this.title, required this.author, required this.thumbnail, required this.url, required this.content, required this.content_to_view, required this.snapshot_data, required this.current_index}) : super(key: key);
   final title ;
   final author ;
   final thumbnail ;
   final url ;
   final content ;
   final content_to_view ;
+  final snapshot_data ;
+  var current_index ;
   @override
   State<other_music_card> createState() => _other_music_cardState();
 }
@@ -28,6 +30,7 @@ class _other_music_cardState extends State<other_music_card> {
           music_card_state.widget.url = widget.url;
           audio_player.pause();
           music_card_state.play_pause = false;
+          music_card_state.widget.current_index = widget.current_index;
         });
       },
       child: Column(

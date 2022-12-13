@@ -14,11 +14,13 @@ late _music_cardState music_card_state ;
 final audio_player = AudioPlayer();
 
 class music_card extends StatefulWidget {
-  music_card({Key? key, required this.title, required this.author, required this.thumbnail, required this.url}) : super(key: key);
+  music_card({Key? key, required this.title, required this.author, required this.thumbnail, required this.url, required this.snapshot_data , required this.current_index, }) : super(key: key);
  var title ;
  var author ;
  var thumbnail ;
  var url ;
+ var snapshot_data ;
+ var current_index ;
   @override
   State<music_card> createState() {
     music_card_state = _music_cardState();
@@ -66,7 +68,19 @@ class _music_cardState extends State<music_card> {
                   SizedBox(height: 10,),
                   Row(
                     children: [
-                      Icon(Icons.arrow_left_outlined,color: Colors.grey,size: 44,),
+                      InkWell(
+                          onTap:(){
+                            setState(() {
+                              music_card_state.widget.title = widget.snapshot_data[widget.current_index - 1]["title"];
+                              music_card_state.widget.author = widget.snapshot_data[widget.current_index - 1]["author"];
+                              music_card_state.widget.thumbnail = widget.snapshot_data[widget.current_index - 1]["thumbnail"];
+                              music_card_state.widget.url = widget.snapshot_data[widget.current_index - 1]["url"];
+                              audio_player.pause();
+                              music_card_state.play_pause = false;
+                              music_card_state.widget.current_index = widget.current_index - 1;
+                            });
+                          },
+                          child: Icon(Icons.arrow_left_outlined,color: Colors.grey,size: 44,)),
                       InkWell(
                           onTap: ()async{
                             setState(() {
@@ -86,11 +100,12 @@ class _music_cardState extends State<music_card> {
                               });
                               Timer.periodic(Duration(seconds: 1), (Timer t) => {
 
-                              setState(() {
+                              setState(() async{
                               progress = audio_player.position;
                               buffer_progress = audio_player.bufferedPosition;
                               duration = audio_player.duration ?? Duration.zero ;
                               play_pause = audio_player.playing ;
+
                               }),
                                 print("Updating " + "${progress}"),
                               });
@@ -101,7 +116,19 @@ class _music_cardState extends State<music_card> {
                           child: play_pause
                           ?Icon(Icons.pause,color: Colors.grey,size: 54,)
                           :Icon(Icons.play_circle_fill,color: Colors.blue,size: 54,)),
-                      Icon(Icons.arrow_right_outlined,color: Colors.grey,size: 44,),
+                      InkWell(
+                          onTap: (){
+                            setState(() {
+                              music_card_state.widget.title = widget.snapshot_data[widget.current_index + 1]["title"];
+                              music_card_state.widget.author = widget.snapshot_data[widget.current_index + 1]["author"];
+                              music_card_state.widget.thumbnail = widget.snapshot_data[widget.current_index + 1]["thumbnail"];
+                              music_card_state.widget.url = widget.snapshot_data[widget.current_index + 1]["url"];
+                              audio_player.pause();
+                              music_card_state.play_pause = false;
+                              music_card_state.widget.current_index = widget.current_index + 1;
+                            });
+                          },
+                          child: Icon(Icons.arrow_right_outlined,color: Colors.grey,size: 44,)),
 
                     ],
                   )
