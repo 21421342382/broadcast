@@ -11,6 +11,8 @@ import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 late _music_cardState music_card_state ;
 
+final audio_player = AudioPlayer();
+
 class music_card extends StatefulWidget {
   music_card({Key? key, required this.title, required this.author, required this.thumbnail, required this.url}) : super(key: key);
  var title ;
@@ -28,7 +30,6 @@ class _music_cardState extends State<music_card> {
   @override
 
   bool play_pause = false;
-  final audio_player = AudioPlayer();
   var progress ;
   var buffer_progress ;
   var duration ;
@@ -84,12 +85,14 @@ class _music_cardState extends State<music_card> {
                                 duration = audio_player.duration ?? Duration.zero ;
                               });
                               Timer.periodic(Duration(seconds: 1), (Timer t) => {
+
                               setState(() {
                               progress = audio_player.position;
                               buffer_progress = audio_player.bufferedPosition;
                               duration = audio_player.duration ?? Duration.zero ;
                               play_pause = audio_player.playing ;
-                              })
+                              }),
+                                print("Updating " + "${progress}"),
                               });
                             }else if(play_pause == false){
                               audio_player.pause();

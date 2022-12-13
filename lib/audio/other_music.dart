@@ -26,7 +26,7 @@ class _other_music_cardState extends State<other_music_card> {
           music_card_state.widget.author = widget.author;
           music_card_state.widget.thumbnail = widget.thumbnail;
           music_card_state.widget.url = widget.url;
-          music_card_state.audio_player.pause();
+          audio_player.pause();
           music_card_state.play_pause = false;
         });
       },

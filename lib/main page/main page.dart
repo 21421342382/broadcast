@@ -3,6 +3,7 @@ import 'package:broadcast/add%20new/add%20new.dart';
 import 'package:broadcast/broadcast/broadcast.dart';
 import 'package:broadcast/controllers/main%20page%20controller.dart';
 import 'package:awesome_bottom_navigation/awesome_bottom_navigation.dart';
+import 'package:broadcast/elements/music%20card.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:broadcast/main%20page/news%20section.dart';
 import 'package:flutter/material.dart';
@@ -60,6 +61,7 @@ class _Main_PageState extends State<Main_Page> {
             ],
             onTapped: (int value) {
               setState(() {
+                audio_player.pause();
                 index_number = value ;
               });
             },
