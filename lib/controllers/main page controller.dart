@@ -8,31 +8,53 @@ class main_page_controller{
   static bool data_loaded = false;
   static bool connected = false;
   static bool loaded_live_news = false;
+  static bool loaded_account = false;
   static bool loaded_audio = false;
-  static var _live_news ;
-  static var _audio ;
-  static var _news ;
+  static var live_news ;
+  static var audio ;
+  static var news ;
   static var url ;
   static var title ;
   static var photo ;
+  static var account ;
 
 
   //////////////// NETWORKING /////////////////////
 
-static load_news()async {
+
+
+  static load_account()async {
+    if(loaded_account == false){
+      final conn_url = await Db.create("mongodb+srv://broadcast_server_access:123qpa456lzm@broadcast.eevngdm.mongodb.net/broadcast_api?retryWrites=true&w=majority");
+      await conn_url.open();
+      loaded_account = true;
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var coll = conn_url.collection('accounts');
+      var news_ = await coll.find(where.eq("email", "${prefs.getString("email")}")).toList();
+      conn_url.close();
+      print(news_.length);
+      main_page_controller.loaded_account = true;
+      main_page_controller.account = news_;
+      return account;
+    }else{
+      return account;
+    }
+  }
+
+  static load_news()async {
   if(connected == false){
     final conn_url = await Db.create("mongodb+srv://broadcast_server_access:123qpa456lzm@broadcast.eevngdm.mongodb.net/broadcast_api?retryWrites=true&w=majority");
     await conn_url.open();
     connected = true;
     var coll = conn_url.collection('news_feed');
-    var news = await coll.find().toList();
+    var news_ = await coll.find().toList();
     conn_url.close();
-    print(news.length);
+    print(news_.length);
     main_page_controller.data_loaded = true;
-    _news = news;
-    return _news;
+    news = news_;
+    return news;
   }else{
-    return _news;
+    return news;
   }
 }
 
@@ -46,11 +68,11 @@ static load_live_news()async {
       conn_url.close();
       print(news.length);
       main_page_controller.loaded_live_news = true;
-      _live_news = news;
-      print(_live_news.length);
-      return _live_news;
+      live_news = news;
+      print(live_news.length);
+      return live_news;
     }else{
-      return _live_news;
+      return live_news;
     }
   }
 
@@ -64,11 +86,11 @@ static load_live_news()async {
       conn_url.close();
       print(news.length);
       main_page_controller.loaded_audio = true;
-      _audio = news;
-      print(_audio.length);
-      return _audio;
+      audio = news;
+      print(audio.length);
+      return audio;
     }else{
-      return _audio;
+      return audio;
     }
   }
 

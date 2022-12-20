@@ -32,10 +32,16 @@ class _sign_up_text_requiredState extends State<sign_up_text_required> {
                 show = true ;
               });
             }else{
+              if(sign_up_controller.has_image == false){
+                setState(() {
+                  show = true;
+                });
+              }else{
                 setState(() {
                   show = false ;
                 });
               }
+            }
             }
         }
     });

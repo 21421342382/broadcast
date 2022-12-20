@@ -1,4 +1,5 @@
 import 'package:broadcast/controllers/main%20page%20controller.dart';
+import 'package:broadcast/controllers/splash%20controller.dart';
 import 'package:broadcast/main%20page/main%20page.dart';
 import 'package:broadcast/main%20page/news%20section.dart';
 import 'package:broadcast/main.dart';
@@ -16,11 +17,18 @@ class splash extends StatefulWidget {
 
 class _splashState extends State<splash> {
   @override
-  check_user_loggedin(){
+  check_user_loggedin()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     Future.delayed(Duration(seconds: 5),()async{
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Main_Page()));
+      print(prefs.getString("LoggedIn"));
+      if(prefs.getString("LoggedIn") == null){
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => sign_up()));
+      }else{
+        splash_controller.update_values(context);
+      }
     });
   }
+
 
   Widget build(BuildContext context) {
     check_user_loggedin();

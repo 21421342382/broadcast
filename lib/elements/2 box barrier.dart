@@ -18,11 +18,12 @@ class _box_barrier_2State extends State<box_barrier_2> {
       if(sign_up_controller.number_of_intrest == 0){
         setState(() {
           color = true;
-          sign_up_controller.box2 = true;
+          sign_up_controller.box2 = false;
         });
       }else{
         setState(() {
           color = false;
+          sign_up_controller.box2 = true;
         });
       }
     });

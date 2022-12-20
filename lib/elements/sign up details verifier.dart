@@ -33,12 +33,18 @@ class _sign_up_details_verfierState extends State<sign_up_details_verfier> {
               setState(() {
                 color = true ;
               });
-            }else {
+            }else{
+              if(sign_up_controller.has_image == false){
+                setState(() {
+                  color = true;
+                });
+              }else {
                 setState(() {
                   color = false;
                   sign_up_controller.box1 = true;
                 });
               }
+            }
           }
       }
     });
